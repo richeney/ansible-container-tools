@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  role_name: container_tools
+  author: azurecitadel
+  description: This role installs docker.io as a service, plus the kubectl and helm binaries
+  company: "None"
+  license: "MIT"
+  min_ansible_version: 2.4
+  platforms:
+  - name: Ubuntu
+    versions:
+      - xenial
+      - bionic
+      - focal
+  galaxy_tags:
+    - docker
+    - kubectl
+    - azure
+    - aks
+    - helm
+
+dependencies:
+  - role: azure_cli
+
+...

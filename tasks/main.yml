@@ -1,0 +1,30 @@
+---
+# Install docker, kubectl, helm
+# Based on <https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest>
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Ensure standard docker is absent
+  apt:
+    name: docker
+    state: absent
+  when: ansible_os_family == 'Debian'
+
+- name: Install docker.io instead
+  apt:
+    name: docker.io
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Run docker as a standard service
+  systemd:
+    state: started
+    enabled: yes
+    name: docker
+
+- name: Install kubectl using the Azure CLI
+  command: sudo /usr/bin/az aks install-cli
+
+...
